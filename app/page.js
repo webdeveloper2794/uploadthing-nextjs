@@ -1,4 +1,3 @@
-"use server";
 import React from "react";
 import { utapi } from "@/server/uploadthing";
 import Files from "@/components/Files";
