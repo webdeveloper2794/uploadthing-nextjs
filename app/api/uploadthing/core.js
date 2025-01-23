@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { createUploadthing } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
@@ -31,6 +32,7 @@ export const ourFileRouter = {
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
+      revalidatePath("/");
       console.log("Upload complete for userId:", metadata.userId);
 
       console.log("file url", file.url);

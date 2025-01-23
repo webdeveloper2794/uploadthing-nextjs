@@ -3,6 +3,7 @@ import React from "react";
 import { utapi } from "@/server/uploadthing";
 import Files from "@/components/Files";
 // import { getFiles, deleteFiles } from "@/actions/file.action";
+export const dynamic = "force-dynamic";
 async function getFiles() {
   const res = await utapi.listFiles();
   return res;
