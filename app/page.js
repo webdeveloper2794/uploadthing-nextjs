@@ -1,25 +1,11 @@
 import React from "react";
-import { utapi } from "@/server/uploadthing";
+import { getFiles } from "@/actions/file.action";
 import Files from "@/components/Files";
 // import { getFiles, deleteFiles } from "@/actions/file.action";
 export const dynamic = "force-dynamic";
-async function getFiles() {
-  const res = await utapi.listFiles();
-  return res;
-}
-async function deleteFiles(fileKey) {
-  const res = await utapi.deleteFiles(fileKey);
-  return res;
-}
+
 export default async function Home() {
   const data = await getFiles();
-  const handleDelete = async (fileKey) => {
-    "use server";
-    await deleteFiles(fileKey);
-    // Refresh data after deletion
-    const newData = await getFiles();
-    return newData;
-  };
 
   return (
     <div className="flex w-full py-12 mx-auto gap-4">

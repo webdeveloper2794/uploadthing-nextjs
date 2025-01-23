@@ -1,16 +1,8 @@
 import React from "react";
-import { utapi } from "@/server/uploadthing";
 import { revalidatePath } from "next/cache";
 import { deleteFiles } from "@/actions/file.action";
 
 export default async function Files({ data }) {
-  //   const handleDelete = async (fileKey) => {
-  //     "use server";
-  //     await deleteFiles(fileKey);
-  //     // Refresh data after deletion
-  //     const newData = await getFiles();
-  //     return newData;
-  //   };
   return (
     <>
       {data.length > 0 && (
