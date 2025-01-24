@@ -9,5 +9,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  providers: [Instagram],
+  providers: [
+    Instagram({
+      clientId: process.env.AUTH_INSTAGRAM_ID,
+      clientSecret: process.env.AUTH_INSTAGRAM_SECRET,
+    }),
+  ],
 });
