@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         <header className="flex items-center justify-center gap-4 p-4">
           <Link href="/">Home</Link>
           <Link href="/upload">Upload</Link>
-          <Link href="/sign-in">Sign nin</Link>
+          <Link href="/sign-in">SignIn</Link>
         </header>
         {children}
       </body>
