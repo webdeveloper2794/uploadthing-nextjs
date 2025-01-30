@@ -3,8 +3,8 @@ import "./globals.css";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
-import Link from "next/link";
-
+import Navbar from "@/components/Navbar";
+import { SessionProvider } from "next-auth/react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,17 +23,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <header className="flex items-center justify-center gap-4 p-4">
-          <Link href="/">Home</Link>
-          <Link href="/upload">Upload</Link>
-          <Link href="/sign-in">SignIn</Link>
-        </header>
-        {children}
-      </body>
+      <SessionProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+          <Navbar />
+          {children}
+        </body>
+      </SessionProvider>
     </html>
   );
 }

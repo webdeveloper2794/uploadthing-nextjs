@@ -1,5 +1,6 @@
 "use server";
 import { utapi } from "@/server/uploadthing";
+import { revalidatePath } from "next/cache";
 
 export async function getFiles() {
   const files = await utapi.listFiles();
@@ -13,3 +14,25 @@ export async function deleteFiles(fileKey) {
 
   return response;
 }
+
+export const getPosts = async () => {
+  const posts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`);
+  if (!posts.ok) {
+    return [];
+  }
+  return posts;
+};
+
+export const deletePost = async (postId) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postId}`,
+    {
+      method: "DELETE",
+    }
+  );
+  revalidatePath("/posts");
+  if (!response.ok) {
+    return [];
+  }
+  return response;
+};
